@@ -14,6 +14,15 @@
     .container {
       max-width: 960px;
     }
+
+    #cart-container {
+      margin-top: 40px;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+      min-height: 120px;
+    }
   </style>
 </head>
 
@@ -27,15 +36,9 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="/products">Product Management</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/users">User Management</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/" onclick="handleLogout()">Logout</a>
-        </li>
+        <li class="nav-item"><a class="nav-link" href="/products">Product Management</a></li>
+        <li class="nav-item"><a class="nav-link" href="/users">User Management</a></li>
+        <li class="nav-item"><a class="nav-link" href="/" onclick="handleLogout()">Logout</a></li>
       </ul>
     </div>
   </nav>
@@ -44,6 +47,9 @@
     <div class="d-flex justify-content-between align-items-center mb-3">
       <h2>Available Products</h2>
     </div>
+
+    <!-- alerta opcional -->
+    <div id="message" class="alert" role="alert" style="display:none;"></div>
 
     <table id="product-list" class="table table-striped">
       <thead>
@@ -56,22 +62,26 @@
           <th>Quantity to Order</th>
         </tr>
       </thead>
-      <tbody>
-      </tbody>
+      <tbody></tbody>
     </table>
+
     <button type="button" onclick="orderProducts()" class="btn btn-success float-right">Place Order</button>
+
+    <!-- Carrito debajo de la tabla (render dinámico) -->
+    <div id="cart-container" class="mt-5">
+      <p class="text-muted m-0">No items in cart.</p>
+    </div>
+
   </div>
 
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script src="/static/scriptProducts.js"></script>
   <script>
-    // Cargar los productos tan pronto como la página esté lista
     document.addEventListener('DOMContentLoaded', function () {
       getProducts();
     });
   </script>
-
 </body>
 
 </html>
