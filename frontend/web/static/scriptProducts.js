@@ -177,12 +177,12 @@ function updateCartView() {
     table.className = 'table table-bordered';
     table.innerHTML = `
       <thead>
-        <tr><th>Product</th><th>Quantity</th><th>Price</th><th>Total</th></tr>
+        <tr><th>Product</th><th>Quantity</th><th>Price</th><th>Total</th><th>Actions</th></tr>
       </thead>
     `;
     const tbody = document.createElement('tbody');
 
-    currentCart.forEach((item) => {
+    currentCart.forEach((item, index) => {
       const itemTotal = item.price * item.quantity;
       total += itemTotal;
       const tr = document.createElement('tr');
@@ -191,6 +191,7 @@ function updateCartView() {
         <td>${item.quantity}</td>
         <td>$${item.price.toFixed(2)}</td>
         <td>$${itemTotal.toFixed(2)}</td>
+        <td><button class="btn btn-danger btn-sm" onclick="removeFromCart(${index})">Delete</button></td>
       `;
       tbody.appendChild(tr);
     });
@@ -272,4 +273,9 @@ function checkoutOrder() {
       console.error('Error placing order:', error);
       alert('Error creating the order: ' + error.message);
     });
+}
+
+function removeFromCart(index) {
+    currentCart.splice(index, 1);
+    updateCartView();
 }

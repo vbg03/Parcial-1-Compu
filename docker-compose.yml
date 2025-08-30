@@ -28,7 +28,7 @@ services:
   users-api:
     build: ./microUsers
     ports:
-      - "5002" #:5002"
+      - "5002:5002"
     environment:
       DATABASE_HOST: database
       DATABASE_USER: root
@@ -41,7 +41,7 @@ services:
   products-api:
     build: ./microProductos
     ports:
-      - "5003" #:5003"
+      - "5003:5003"
     environment:
       DATABASE_HOST: database
       DATABASE_USER: root
@@ -54,7 +54,7 @@ services:
   orders-api:
     build: ./microOrders
     ports:
-      - "5004" #:5004"
+      - "5004:5004"
     environment:
       DATABASE_HOST: database
       DATABASE_USER: root
