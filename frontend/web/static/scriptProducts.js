@@ -138,7 +138,7 @@ function updateProduct() {
 
 function orderProducts() {
   const isDashboard = window.location.pathname.includes('/dashboard');
-  if (!isDashboard) return; 
+  if (!isDashboard) return;
 
   currentCart = [];
   const productRows = document.querySelectorAll('#product-list tbody tr');
@@ -245,8 +245,16 @@ function checkoutOrder() {
     return;
   }
 
+  const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
+
+  if (!currentUser) {
+    alert('You are not logged in. Please log out and log in again.');
+    return;
+  }
+
   const orderData = {
-    user: { name: 'Test User', email: 'test@example.com' },
+    // Usamos los datos del usuario que inició sesión
+    user: { name: currentUser.name, email: currentUser.email },
     products: currentCart.map((p) => ({ id: p.id, quantity: p.quantity }))
   };
 
@@ -276,6 +284,6 @@ function checkoutOrder() {
 }
 
 function removeFromCart(index) {
-    currentCart.splice(index, 1);
-    updateCartView();
+  currentCart.splice(index, 1);
+  updateCartView();
 }

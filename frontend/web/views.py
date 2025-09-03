@@ -52,6 +52,10 @@ def products():
 def users():
     return render_template('users.html')
 
+@app.route('/orders')
+def orders():
+    return render_template('orders.html')
+
 @app.route('/editUser/<string:id>')
 def edit_user(id):
     print("id recibido",id)

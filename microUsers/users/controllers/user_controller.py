@@ -71,7 +71,13 @@ def login():
     session['username'] = user.username
     session['email'] = user.email
 
-    return jsonify({'message': 'Login successful'}), 200
+    return jsonify({
+        'message': 'Login successful', 
+        'user': {
+            'name': user.name,
+            'email': user.email
+        }
+    }), 200
 
 @user_controller.route('/api/logout', methods=['POST'])
 def logout():

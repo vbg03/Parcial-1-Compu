@@ -82,3 +82,13 @@ def create_order():
 @order_controller.route('/health', methods=['GET'])
 def health_check():
     return 'OK', 200
+
+@order_controller.route('/api/orders/<int:order_id>', methods=['DELETE'])
+def delete_order(order_id):
+    order = Orders.query.get_or_404(order_id)
+    
+    
+    db.session.delete(order)
+    db.session.commit()
+    
+    return jsonify({'message': 'Order deleted successfully'}), 200
