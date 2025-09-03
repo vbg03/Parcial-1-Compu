@@ -56,7 +56,7 @@ Dentro de la máquina virtual (`servidorUbuntu`), navega hasta la carpeta del pr
 
 ```bash
 cd /vagrant
-docker-compose up --build
+docker compose up --build -d
 ```
 
 Este comando construirá las imágenes de Docker para cada servicio (si es necesario) y los iniciará.
