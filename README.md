@@ -31,8 +31,8 @@ Sigue estos pasos para configurar el entorno de desarrollo:
 1.  **Clona el repositorio**:
 
     ```bash
-    git clone <URL-del-repositorio>
-    cd <nombre-del-repositorio>
+    git clone https://github.com/vbg03/Parcial-1-Compu.git
+    cd Parcial-1-Compu
     ```
 
 2.  **Levanta la máquina virtual con Vagrant**:
