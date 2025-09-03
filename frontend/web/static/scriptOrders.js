@@ -46,6 +46,45 @@ function getOrders() {
 }
 
 
+function getOrderById() {
+    const orderId = document.getElementById('orderIdInput').value;
+    const orderDetailsDiv = document.getElementById('orderDetails');
+
+    if (!orderId) {
+        alert('Please enter a valid order ID');
+        return;
+    }
+
+    fetch(`${ORDERS_API_URL}/${orderId}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Order not found');
+            }
+            return response.json();
+        })
+        .then(order => {
+            const orderDate = new Date(order.date).toLocaleString();
+
+            orderDetailsDiv.innerHTML = `
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Order #${order.id}</h5>
+                        <p><strong>User:</strong> ${order.userName}</p>
+                        <p><strong>Email:</strong> ${order.userEmail}</p>
+                        <p><strong>Total:</strong> $${parseFloat(order.saleTotal).toFixed(2)}</p>
+                        <p><strong>Date:</strong> ${orderDate}</p>
+                    </div>
+                </div>
+            `;
+        })
+        .catch(error => {
+            console.error('Error fetching order:', error);
+            orderDetailsDiv.innerHTML = `<p class="text-danger">Order not found or error fetching order.</p>`;
+        });
+}
+
+
+
 function deleteOrder(orderId) {
 
     if (!confirm('Are you sure you want to delete this order?')) {
@@ -69,4 +108,5 @@ function deleteOrder(orderId) {
         console.error('Error deleting order:', error);
         alert('Could not delete the order. Please try again.');
     });
+
 }
